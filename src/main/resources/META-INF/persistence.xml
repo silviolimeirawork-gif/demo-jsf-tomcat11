@@ -1,9 +1,82 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <persistence xmlns="https://jakarta.ee/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_2.xsd"
-             version="3.2">
-    <persistence-unit name="default">
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
+             https://jakarta.ee/xml/ns/persistence/persistence_3_1.xsd"
+             version="3.1">
+    <persistence-unit name="devPU"
+                      transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
+        <properties>
+            <!-- Configurações básicas -->
+            <property name="jakarta.persistence.jdbc.driver"
+                      value="com.mysql.cj.jdbc.Driver"/>
+            <property name="jakarta.persistence.jdbc.url"
+                      value="jdbc:mysql://localhost:3306/producao?createDatabaseIfNotExist=true"/>
+
+            <property name="jakarta.persistence.jdbc.user" value="root"/>
+            <property name="jakarta.persistence.jdbc.password"
+                      value="password"/>
+
+            <!-- Dialeto MySQL -->
+            <property name="hibernate.dialect"
+                      value="org.hibernate.dialect.MySQLDialect"/>
+
+            <property
+                    name="jakarta.persistence.schema-generation.database.action"
+                    value="drop-and-create"/>
+
+            <!-- =========================================== -->
+            <!-- DATA LOADING PROPERTIES (JPA 3.1) -->
+            <!-- =========================================== -->
+
+            <!-- Script para carga inicial de dados -->
+            <property name="jakarta.persistence.sql-load-script-source"
+                      value="META-INF/sql/dev-data.sql"/>
+
+            <!-- Executar script de carga após criação -->
+            <property
+                    name="jakarta.persistence.schema-generation.scripts.action"
+                    value="create"/>
+            <!-- Valores possíveis: - none: não executa scripts - create: executa
+                apenas scripts de criação - drop-and-create: executa drop e create - drop:
+                executa apenas scripts de remoção -->
+
+            <!-- Tipo do script (opcional) -->
+            <property
+                    name="jakarta.persistence.schema-generation.scripts.create-target"
+                    value="META-INF/sql/create-output.sql"/>
+
+            <property
+                    name="jakarta.persistence.schema-generation.scripts.drop-target"
+                    value="META-INF/sql/drop-output.sql"/>
+
+            <!-- =========================================== -->
+            <!-- CONFIGURAÇÃO CORRETA HIKARICP - HIBERNATE 6.x -->
+            <!-- =========================================== -->
+
+            <!-- FORMA 1: Configuração automática -->
+            <property name="hibernate.connection.provider_class"
+                      value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider"/>
+
+            <!-- FORMA 2: Configuração simplificada (recomendada) -->
+            <!-- <property name="hibernate.hikari.dataSourceClassName" value="com.mysql.cj.jdbc.MysqlDataSource"/> -->
+
+            <!-- Configurações do pool -->
+            <property name="hibernate.hikari.minimumIdle" value="5"/>
+            <property name="hibernate.hikari.maximumPoolSize" value="20"/>
+            <property name="hibernate.hikari.idleTimeout" value="30000"/>
+            <property name="hibernate.hikari.connectionTimeout"
+                      value="20000"/>
+            <property name="hibernate.hikari.maxLifetime" value="120000"/>
+            <property name="hibernate.hikari.connectionTestQuery"
+                      value="SELECT 1"/>
+
+            <!-- Outras configurações Hibernate -->
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+        </properties>
     </persistence-unit>
 </persistence>
