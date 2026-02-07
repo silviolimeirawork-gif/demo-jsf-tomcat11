@@ -4,9 +4,11 @@
       xmlns:f="jakarta.faces.core"
       xmlns:h="jakarta.faces.html">
 <f:view>
-    <h:head></h:head>
-    <h:body>
-        <h:outputText value="Hello, world jsf finnally" />
-    </h:body>
+  <h:head></h:head>
+  <h:body>
+      <h:form>
+          <h:outputText value="#{helloWorldBean.sayHello}" />
+      </h:form>
+  </h:body>
 </f:view>
 </html>
