@@ -7,7 +7,7 @@ import jakarta.enterprise.context.RequestScoped;
 @RequestScoped
 public class HelloWorldBean {
 
-    private String sayHello = "Olá, Jakarta Faces no Tomcat 11 :=) !";
+    private String sayHello = "Olá, Jakarta Faces no Tomcat 11 :=0 !";
 
     // O JSF usa o getter para acessar a propriedade
     public String getSayHello() {
