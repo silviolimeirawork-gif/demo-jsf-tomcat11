@@ -16,6 +16,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <junit.version>5.13.2</junit.version>
         <primefaces.version>14.0.0</primefaces.version> <!-- Use a recent version -->
+        <jakarta.el.version>5.0.0</jakarta.el.version>
     </properties>
 
     <dependencies>
@@ -48,7 +49,7 @@
         <dependency>
             <groupId>org.jboss.weld.servlet</groupId>
             <artifactId>weld-servlet-shaded</artifactId>
-            <version>5.1.5.Final</version>
+            <version>5.1.0.Final</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -84,15 +85,13 @@
             <version>6.4.4.Final</version>
         </dependency>
 
+        <!-- Outras dependências do Jakarta EE fornecidas pelo Tomcat 11 (opcional, mas pode ser necessário) -->
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
-            <version>6.0.0</version> <!-- Ou 5.0.0 para Jakarta EE 9, 6.0+ para
-			Jakarta EE 10 -->
-            <!--<scope>provided</scope>  Essencial para Tomcat 10+ ou outros
-            servidores modernos -->
+            <version>6.0.0</version>
+            <scope>provided</scope>
         </dependency>
-
 
         <!-- MySQL Connector 8.0 -->
         <dependency>
@@ -102,6 +101,51 @@
             <scope>compile</scope>
         </dependency>
 
+
+        <!-- Weld Core para Tomcat 11 -->
+        <dependency>
+            <groupId>org.jboss.weld</groupId>
+            <artifactId>weld-core-impl</artifactId>
+            <version>5.1.2.Final</version>
+        </dependency>
+
+        <!-- Weld Servlet Integration -->
+        <dependency>
+            <groupId>org.jboss.weld.servlet</groupId>
+            <artifactId>weld-servlet-core</artifactId>
+            <version>5.1.2.Final</version>
+        </dependency>
+
+        <!-- Jakarta CDI API -->
+        <dependency>
+            <groupId>jakarta.enterprise</groupId>
+            <artifactId>jakarta.enterprise.cdi-api</artifactId>
+            <version>4.1.0</version>
+            <!-- Não use scope provided porque Tomcat não fornece CDI -->
+            <!-- <scope>provided</scope> -->
+        </dependency>
+
+        <!-- Jakarta Servlet API -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
+            <!-- <scope>provided</scope> -->
+        </dependency>
+
+        <!-- Jakarta Expression Language (EL) - necessário para ELAwareBeanManager -->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>jakarta.el</artifactId>
+            <version>5.0.0-M1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.enterprise</groupId>
+            <artifactId>jakarta.enterprise.cdi-el-api</artifactId>
+            <version>4.1.0</version> <!-- Compatível com CDI 4.1 / Jakarta EE 11 -->
+            <!-- <scope>provided</scope> -->
+        </dependency>
 
     </dependencies>
 

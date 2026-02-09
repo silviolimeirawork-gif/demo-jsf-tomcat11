@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.example.demo.model.Empresa;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 
@@ -11,6 +12,7 @@ public class Empresas implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Inject
     private EntityManager manager;
 
     public Empresas() {
