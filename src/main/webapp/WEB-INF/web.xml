@@ -19,6 +19,12 @@
         <param-value>true</param-value>
     </context-param>
 
+    <context-param>
+        <param-name>jakarta.faces.FACELETS_REFRESH_PERIOD</param-name>
+        <param-value>0</param-value>
+    </context-param>
+
+
     <!-- Servlet JSF -->
     <servlet>
         <servlet-name>facesServlet</servlet-name>
@@ -33,6 +39,6 @@
 
     <!-- Página inicial -->
     <welcome-file-list>
-        <welcome-file>index.xhtml</welcome-file>
+        <welcome-file>GestaoEmpresas.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>

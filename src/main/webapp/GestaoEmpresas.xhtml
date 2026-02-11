@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="jakarta.faces.core"
+      xmlns:h="jakarta.faces.html">
+<f:view>
+    <h:head>
+        <h:outputStylesheet library="sicemal" name="estilo.css" />
+    </h:head>
+    <h:body>
+
+        <header>
+            <h:graphicImage library="sicemal" name="logo.png" />
+            Gestão Empresas
+        </header>
+
+        <div id="conteudo">
+            <h:form>
+                <h:panelGrid columns="2">
+
+                    <h:outputLabel value="Razão Social: " for="razaoSocial"/>
+                    <h:inputText id="razaoSocial"/>
+
+                    <h:outputLabel value="Nome Fantasia: " for="nomeFantasia" />
+                    <h:inputText id="nomeFantasia"/>
+
+                    <h:outputLabel value="Tipo empresa: " for="tipo"/>
+                    <h:selectOneMenu id="tipo">
+                        <f:selectItem itemLabel="Selecione..."/>
+                        <f:selectItem itemLabel="MEI" itemValue="MEI" />
+                        <f:selectItem itemLabel="LTDA" itemValue="LTDA" />
+                    </h:selectOneMenu>
+
+                    <h:outputLabel />
+                    <h:commandButton value="Salvar" />
+
+                </h:panelGrid>
+
+                <h:dataTable value="#{[0, 0, 0, 0]}">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputLabel value="Razão Social" />
+                        </f:facet>
+
+                        <h:outputLabel value="SL Softwares, Treinamentos LTDA."/>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputLabel value="Nome Fantasia" />
+                        </f:facet>
+
+                        <h:outputLabel value="SL Softwares"/>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputLabel value="Tipo Empresa" />
+                        </f:facet>
+
+                        <h:outputLabel value="LTDA"/>
+                    </h:column>
+
+
+                </h:dataTable>
+
+            </h:form>
+        </div>
+
+        <footer>
+            Curso "JSF e PrimeFaces Essencial"
+        </footer>
+
+    </h:body>
+</f:view>
+</html>

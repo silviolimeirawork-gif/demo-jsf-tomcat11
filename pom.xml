@@ -36,6 +36,7 @@
             <artifactId>hibernate-validator</artifactId>
             <version>9.0.1.Final</version>
         </dependency>
+        <!-- Para JSF -->
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>jakarta.faces</artifactId>
@@ -86,6 +87,7 @@
         </dependency>
 
         <!-- Outras dependências do Jakarta EE fornecidas pelo Tomcat 11 (opcional, mas pode ser necessário) -->
+        <!-- Utilizado no JSF -->
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
