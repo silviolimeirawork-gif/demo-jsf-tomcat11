@@ -5,6 +5,7 @@ import com.example.demo.model.TipoEmpresa;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.event.ActionEvent;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -39,4 +40,7 @@ public class GestaoEmpresasBean implements Serializable {
                 " - Tipo: " + empresa.getTipo());
     }
 
+    public String ajuda() {
+        return "AjudaGestaoEmpresas?faces-redirect=true";
+    }
 }
