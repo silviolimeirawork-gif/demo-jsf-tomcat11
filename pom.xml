@@ -26,6 +26,23 @@
             <version>11.0.0</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- Jakarta EE 11 API (Provided by Tomcat 11 at runtime) -->
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>11.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- PrimeFaces with the 'jakarta' classifier -->
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>13.0.4</version> <!-- Use the latest compatible version -->
+            <classifier>jakarta</classifier>
+        </dependency>
+
         <dependency>
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
