@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="jakarta.faces.core"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+<f:view>
+    <h:head>
+        <h:outputStylesheet library="sicemal" name="estilo.css" />
+        <f:metadata>
+            <f:viewAction action="#{gestaoEmpresasBean.todasEmpresas}" />
+        </f:metadata>
+    </h:head>
+    <h:body>
+
+        <header>
+            <h:graphicImage library="sicemal" name="logo.png" />Gestão Empresas
+        </header>
+
+        <h2>
+            <ui:insert name="titulo"/>
+        </h2>
+
+        <div id="conteudo">
+            <ui:insert name="conteudo"/>
+        </div>
+
+        <footer>
+            Curso "JSF e PrimeFaces Essencial"
+        </footer>
+
+    </h:body>
+</f:view>
+</html>
