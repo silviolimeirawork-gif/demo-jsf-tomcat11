@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.example.demo.model.RamoAtividade;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -14,6 +15,7 @@ public class RamoAtividades implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Inject
     private EntityManager manager;
 
     public RamoAtividades() {

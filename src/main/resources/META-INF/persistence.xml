@@ -9,6 +9,9 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <properties>
+            <property name="hibernate.validator.autoregister_listeners"
+                      value="false"/>
+
             <!-- Configurações básicas -->
             <property name="jakarta.persistence.jdbc.driver"
                       value="com.mysql.cj.jdbc.Driver"/>
@@ -79,4 +82,5 @@
             <property name="hibernate.format_sql" value="true"/>
         </properties>
     </persistence-unit>
+
 </persistence>

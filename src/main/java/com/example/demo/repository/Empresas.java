@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.example.demo.model.Empresa;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 
@@ -11,6 +12,7 @@ public class Empresas implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Inject
     private EntityManager manager;
 
     public Empresas() {
@@ -32,6 +34,10 @@ public class Empresas implements Serializable {
                 .createQuery(jpql, Empresa.class);
         query.setParameter("nomeFantasia", nome + "%");
         return query.getResultList();
+    }
+
+    public List<Empresa> todas() {
+        return manager.createQuery("from Empresa", Empresa.class).getResultList();
     }
 
     public Empresa guardar(Empresa empresa) {

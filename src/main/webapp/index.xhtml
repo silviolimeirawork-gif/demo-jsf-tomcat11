@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="jakarta.faces.core"
-      xmlns:h="jakarta.faces.html">
-<f:view>
-  <h:head></h:head>
-  <h:body>
-      <h:form>
-          <h:outputText value="#{helloWorldBean.sayHello}" />
-      </h:form>
-  </h:body>
-</f:view>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <h:head>
+        <title>JSF + CDI</title>
+    </h:head>
+    
+    <h:body>
+        <h1>#{meuController.mensagem}</h1>
+        
+        <h:form>
+            <h:inputText value="#{meuController.mensagem}" />
+            <h:commandButton value="Enviar" action="#{meuController.enviar()}" />
+        </h:form>
+    </h:body>
 </html>

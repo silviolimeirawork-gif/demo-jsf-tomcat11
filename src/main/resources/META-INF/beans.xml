@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="https://jakarta.ee/xml/ns/jakartaee"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/beans_4_1.xsd">
+<beans
+        xmlns="https://jakarta.ee/xml/ns/jakartaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+    https://jakarta.ee/xml/ns/jakartaee/beans_4_0.xsd"
+        version="4.0"
+        bean-discovery-mode="all">
+
+    <!--
+    bean-discovery-mode pode ser:
+    - "all": descobre todos os beans
+    - "annotated": descobre apenas beans com anotações de escopo
+    - "none": desabilita a descoberta de beans
+    -->
+
+    <!-- Configurações adicionais opcionais -->
+    <alternatives>
+        <!-- <class>com.exemplo.MinhaAlternativa</class> -->
+    </alternatives>
+
+    <interceptors>
+        <!-- <class>com.exemplo.MeuInterceptor</class> -->
+    </interceptors>
+
+    <decorators>
+        <!-- <class>com.exemplo.MeuDecorator</class> -->
+    </decorators>
 
 </beans>

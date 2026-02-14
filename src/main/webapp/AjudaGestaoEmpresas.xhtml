@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="jakarta.faces.core"
+      xmlns:h="jakarta.faces.html">
+<f:view>
+    <h:head>
+        <h:outputStylesheet library="sicemal" name="estilo.css" />
+    </h:head>
+    <h:body>
+
+        <header>
+            <h:graphicImage library="sicemal" name="logo.png" />Ajuda
+        </header>
+
+        <h2>Ajuda</h2>
+
+        <div id="conteudo">
+            <h:form>
+
+                <p>Esta é a ajuda da tela cadastro de emrpesas</p>
+
+                <p>
+                    <h:commandLink value="Voltar" action="GestaoEmpresas?faces-redirect=true"/>
+                </p>
+
+            </h:form>
+        </div>
+
+        <footer>
+            Curso "JSF e PrimeFaces Essencial"
+        </footer>
+
+    </h:body>
+</f:view>
+</html>
