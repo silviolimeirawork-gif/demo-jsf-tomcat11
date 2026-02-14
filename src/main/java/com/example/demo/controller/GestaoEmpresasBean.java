@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Empresa;
 import com.example.demo.model.TipoEmpresa;
+import com.example.demo.repository.Empresas;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
@@ -12,6 +13,7 @@ import jakarta.inject.Named;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.List;
 
 @Named
 //@RequestScoped
@@ -24,23 +26,16 @@ public class GestaoEmpresasBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Inject
-    private Empresa empresa;
+    private Empresas empresas;
 
-    public Empresa getEmpresa() {
-        return empresa;
+    private List<Empresa> listaEmpresas;
+
+    public void todasEmpresas() {
+        listaEmpresas = empresas.todas();
     }
 
-    public TipoEmpresa[] getTiposEmpresa() {
-        return TipoEmpresa.values();
+    public List<Empresa> getListaEmpresas() {
+        return listaEmpresas;
     }
 
-    public void salvar() {
-        System.out.println("Razao Social: " + empresa.getRazaoSocial() +
-                " - Nome fantasia: " + empresa.getNomeFantasia() +
-                " - Tipo: " + empresa.getTipo());
-    }
-
-    public String ajuda() {
-        return "AjudaGestaoEmpresas?faces-redirect=true";
-    }
 }

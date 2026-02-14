@@ -12,7 +12,7 @@ public class EntityManagerProducer {
     private EntityManagerFactory factory;
 
     public EntityManagerProducer() {
-        this.factory = Persistence.createEntityManagerFactory("cevPU");
+        this.factory = Persistence.createEntityManagerFactory("devPU");
     }
 
     @Produces
