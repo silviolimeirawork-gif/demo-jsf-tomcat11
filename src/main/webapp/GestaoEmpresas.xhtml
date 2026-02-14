@@ -16,6 +16,32 @@
     </f:metadata>
 
     <h:form>
+        <p:toolbar styleClass="ui-toolbar-primary">
+            <p:toolbarGroup align="left">
+                <p:inputText size="30" placeholder="Pesquisar..." />
+                <p:commandButton icon="pi pi-search" title="Buscar" />
+
+                <p:separator />
+
+                <p:commandButton value="Nova" icon="pi pi-plus" />
+
+                <p:separator />
+
+                <p:commandButton title="Editar" icon="pi pi-pencil" />
+
+                <p:commandButton title="Excluir" icon="pi pi-trash" />
+
+                <p:separator />
+
+                <p:commandButton title="Exportar para o excel" icon="pi pi-file-excel" />
+
+                <p:separator />
+
+            </p:toolbarGroup>
+
+        </p:toolbar>
+
+        <p:spacer height="30px" />
 
         <p:dataTable value="#{gestaoEmpresasBean.listaEmpresas}"
                      var="empresa" emptyMessage="Nenhuma informação a ser exibida."

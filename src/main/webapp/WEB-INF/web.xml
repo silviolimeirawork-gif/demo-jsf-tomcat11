@@ -8,6 +8,12 @@
 
     <display-name>JSF CDI Application</display-name>
 
+    <context-param>
+        <param-name>primefaces.FONT_AWESOME</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+
     <!-- Configuração JSF -->
     <context-param>
         <param-name>jakarta.faces.PROJECT_STAGE</param-name>
