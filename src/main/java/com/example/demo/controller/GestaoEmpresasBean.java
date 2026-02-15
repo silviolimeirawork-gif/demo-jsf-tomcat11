@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.model.Empresa;
 import com.example.demo.model.TipoEmpresa;
 import com.example.demo.repository.Empresas;
+import com.example.demo.util.FacesMessages;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
@@ -25,8 +26,13 @@ public class GestaoEmpresasBean implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
+    private String termoPesquisa;
+
     @Inject
     private Empresas empresas;
+
+    @Inject
+    private FacesMessages facesMessages;
 
     private List<Empresa> listaEmpresas;
 
@@ -38,4 +44,19 @@ public class GestaoEmpresasBean implements Serializable {
         return listaEmpresas;
     }
 
+    public String getTermoPesquisa() {
+        return termoPesquisa;
+    }
+
+    public void setTermoPesquisa(String termoPesquisa) {
+        this.termoPesquisa = termoPesquisa;
+    }
+
+    public void pesquisar() {
+        listaEmpresas = empresas.pesquisar(termoPesquisa);
+
+        if (listaEmpresas.isEmpty()) {
+            facesMessages.info("Sua consulta não retornou registros.");
+        }
+    }
 }

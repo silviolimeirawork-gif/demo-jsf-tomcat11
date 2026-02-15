@@ -16,10 +16,23 @@
     </f:metadata>
 
     <h:form>
+        <p:messages id="msgs"
+                    showDetail="true"
+                    closable="true" />
+
         <p:toolbar styleClass="ui-toolbar-primary">
             <p:toolbarGroup align="left">
-                <p:inputText size="30" placeholder="Pesquisar..." />
-                <p:commandButton icon="pi pi-search" title="Buscar" />
+                <p:inputText
+                        size="30"
+                        placeholder="Pesquisar..."
+                        value="#{gestaoEmpresasBean.termoPesquisa}"
+                />
+                <p:commandButton
+                        icon="pi pi-search"
+                        title="Buscar"
+                        actionListener="#{gestaoEmpresasBean.pesquisar}"
+                        update="empresasDataTable msgs"
+                />
 
                 <p:separator />
 
@@ -44,9 +57,11 @@
 
         <p:spacer height="30px" />
 
-        <p:dataTable value="#{gestaoEmpresasBean.listaEmpresas}"
-                     var="empresa" emptyMessage="Nenhuma informação a ser exibida."
-                     paginator="true" rows="10" paginatorPosition="bottom">
+        <p:dataTable
+                id="empresasDataTable"
+                value="#{gestaoEmpresasBean.listaEmpresas}"
+                var="empresa" emptyMessage="Nenhuma informação a ser exibida."
+                paginator="true" rows="10" paginatorPosition="bottom">
             <p:column headerText="Razão social" sortBy="#{empresa.razaoSocial}">
                 <h:outputLabel value="#{empresa.razaoSocial}" />
             </p:column>

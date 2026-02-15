@@ -25,7 +25,7 @@ public class DatabaseBackupScheduler implements ServletContextListener {
         scheduler = Executors.newSingleThreadScheduledExecutor();
 
         // Agenda a tarefa de backup para rodar a cada hora (com delay inicial 0)
-        scheduler.scheduleAtFixedRate(new BackupTask(), 0, 1, TimeUnit.SECONDS);
+        scheduler.scheduleAtFixedRate(new BackupTask(), 0, 1, TimeUnit.DAYS);
 
         logger.info("Agendador de backups iniciado. Backup será executado a cada hora.");
     }
