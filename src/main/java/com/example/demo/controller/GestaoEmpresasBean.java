@@ -59,4 +59,8 @@ public class GestaoEmpresasBean implements Serializable {
             facesMessages.info("Sua consulta não retornou registros.");
         }
     }
+
+    public TipoEmpresa[] getTiposEmpresa() {
+        return TipoEmpresa.values();
+    }
 }
