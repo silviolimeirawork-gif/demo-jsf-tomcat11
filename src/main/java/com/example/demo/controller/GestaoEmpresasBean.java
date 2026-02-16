@@ -1,12 +1,16 @@
 package com.example.demo.controller;
 
+import com.example.demo.converter.RamoAtividadeConverter;
 import com.example.demo.model.Empresa;
+import com.example.demo.model.RamoAtividade;
 import com.example.demo.model.TipoEmpresa;
 import com.example.demo.repository.Empresas;
+import com.example.demo.repository.RamoAtividades;
 import com.example.demo.util.FacesMessages;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.convert.Converter;
 import jakarta.faces.event.ActionEvent;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
@@ -27,6 +31,11 @@ public class GestaoEmpresasBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String termoPesquisa;
+
+    @Inject
+    private RamoAtividades ramoAtividades;
+
+    private Converter ramoAtividadeConverter;
 
     @Inject
     private Empresas empresas;
@@ -62,5 +71,17 @@ public class GestaoEmpresasBean implements Serializable {
 
     public TipoEmpresa[] getTiposEmpresa() {
         return TipoEmpresa.values();
+    }
+
+    public List<RamoAtividade> completarRamoAtividade(String termo) {
+        List<RamoAtividade> listaRamoAtividades = ramoAtividades.pesquisar(termo);
+
+        ramoAtividadeConverter = new RamoAtividadeConverter(listaRamoAtividades);
+
+        return listaRamoAtividades;
+    }
+
+    public Converter getRamoAtividadeConverter() {
+        return ramoAtividadeConverter;
     }
 }

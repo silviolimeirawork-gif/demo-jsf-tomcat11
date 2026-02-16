@@ -86,6 +86,8 @@
                   resizable="false"
                   closeOnEscape="true"
         >
+            <p:growl id="growl" showDetail="true" life="3000"/>
+
             <h:panelGrid columns="2">
                 <p:outputLabel value="Razão social:" for="razaoSocial"/>
                 <p:inputText id="razaoSocial" size="80" maxlength="120" />
@@ -108,7 +110,35 @@
                 <p:calendar id="dataFundacao" pattern="dd/MM/yyyy" size="30"/>
 
                 <p:outputLabel value="Ramo atividade: " for="ramoAtividade" />
-                <p:autoComplete id="ramoAtividade" size="80" />
+                <p:autoComplete
+                        id="ramoAtividade"
+                        size="80"
+                        completeMethod="#{gestaoEmpresasBean.completarRamoAtividade}"
+                        converter="#{gestaoEmpresasBean.ramoAtividadeConverter}"
+                        var="ramoAtividade"
+                        itamLabel="#{ramoAtividade.descricao}"
+                        itemValue="#{ramoAtividade}"
+                />
+
+                <!-- Seleção Simples -->
+                <p:outputLabel for="simples" value="Seleção Simples:"/>
+                <p:autoComplete id="simples"
+                                value="#{autoCompleteBean.ramoAtividadeSelecionado}"
+                                completeMethod="#{autoCompleteBean.buscarRamoAtividades}"
+                                var="ramoAtividade"
+                                itemLabel="#{ramoAtividade.descricao}"
+                                itemValue="#{ramoAtividade}"
+                                converter="ramoAtividadeConverter"
+                                forceSelection="true"
+                                dropdown="true"
+                                minQueryLength="2"
+                                placeholder="Digite a descricao do ramo da atividade..."
+                                panelStyle="width:300px">
+
+                    <p:ajax event="itemSelect"
+                            listener="#{autoCompleteBean.aoSelecionar}"
+                            update="growl"/>
+                </p:autoComplete>
 
                 <h:outputLabel />
                 <p:commandButton value="Salvar" />
