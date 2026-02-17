@@ -66,6 +66,9 @@
                         title="Excluir"
                         icon="pi pi-trash"
                         disabled="#{not gestaoEmpresasBean.empresaSelecionada}"
+                        actionListener="#{gestaoEmpresasBean.excluir}"
+                        update="msgs empresasDataTable toolbar"
+                        process="@this"
                 />
 
                 <p:separator />

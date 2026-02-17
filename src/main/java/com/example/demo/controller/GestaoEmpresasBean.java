@@ -70,6 +70,20 @@ public class GestaoEmpresasBean implements Serializable {
         facesMessages.info("Empresa salva com sucesso!");
     }
 
+    public void excluir() {
+        cadastroEmpresaService.excluir(empresa);
+
+        empresa = null;
+
+        if (jaHouvePesquisa()) {
+            pesquisar();
+        } else {
+            todasEmpresas();
+        }
+
+        facesMessages.info("Empresa excluída com sucesso!");
+    }
+
 
     public void prepararNovaEmpresa() {
         empresa = new Empresa();
