@@ -21,6 +21,7 @@ import jakarta.inject.Named;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 @Named
@@ -34,6 +35,8 @@ public class GestaoEmpresasBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String termoPesquisa;
+
+    private Converter ramoAtividadeConverter;
 
     @Inject
     private RamoAtividades ramoAtividades;
@@ -70,6 +73,11 @@ public class GestaoEmpresasBean implements Serializable {
 
     public void prepararNovaEmpresa() {
         empresa = new Empresa();
+    }
+
+    public void prepararEdicao() {
+        ramoAtividadeConverter = new RamoAtividadeConverter(Arrays.asList(empresa.getRamoAtividade()));
+        autoCompleteBean.setRamoAtividadeSelecionado(empresa.getRamoAtividade());
     }
 
     @Inject
