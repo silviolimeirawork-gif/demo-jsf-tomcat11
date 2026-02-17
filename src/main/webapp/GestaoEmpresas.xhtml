@@ -12,7 +12,7 @@
 
 <ui:define name="conteudo">
 
-    <h:form>
+    <h:form id="frm">
         <f:metadata>
             <f:viewAction action="#{gestaoEmpresasBean.todasEmpresas}" />
         </f:metadata>
@@ -21,7 +21,8 @@
                     showDetail="true"
                     closable="true" />
 
-        <p:toolbar styleClass="ui-toolbar-primary">
+        <p:toolbar id="toolbar"
+                styleClass="ui-toolbar-primary">
             <p:toolbarGroup align="left">
                 <p:inputText id="tempoPesquisa"
                         size="30"
@@ -49,9 +50,17 @@
 
                 <p:separator />
 
-                <p:commandButton title="Editar" icon="pi pi-pencil" />
+                <p:commandButton
+                        title="Editar"
+                        icon="pi pi-pencil"
+                        disabled="#{not gestaoEmpresasBean.empresaSelecionada}"
+                />
 
-                <p:commandButton title="Excluir" icon="pi pi-trash" />
+                <p:commandButton
+                        title="Excluir"
+                        icon="pi pi-trash"
+                        disabled="#{not gestaoEmpresasBean.empresaSelecionada}"
+                />
 
                 <p:separator />
 
@@ -68,10 +77,23 @@
         <p:dataTable
                 id="empresasDataTable"
                 value="#{gestaoEmpresasBean.listaEmpresas}"
-                var="empresa" emptyMessage="Nenhuma informação a ser exibida."
-                paginator="true" rows="10" paginatorPosition="bottom">
+                var="empresa"
+                emptyMessage="Nenhuma informação a ser exibida."
+                paginator="true"
+                rows="10"
+                paginatorPosition="bottom"
+                selectionMode="single"
+                selection="#{gestaoEmpresasBean.empresa}"
+                rowKey="#{empresa.id}"
+        >
+            <p:ajax event="rowSelect" update="frm:toolbar" />
+
+            <p:ajax event="rowUnselect" update="frm:toolbar" />
+
             <p:column headerText="Razão social" sortBy="#{empresa.razaoSocial}">
-                <h:outputLabel value="#{empresa.razaoSocial}" />
+<!--    Observação importante, quando uso um outputLabel dificulta a seleção da linha na grid
+    aplicar essa solução vV -->
+                #{empresa.razaoSocial}
             </p:column>
 
             <p:column headerText="Nome fantazia" sortBy="#{empresa.nomeFantasia}">
