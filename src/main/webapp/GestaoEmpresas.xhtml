@@ -43,8 +43,9 @@
                                  actionListener="#{gestaoEmpresasBean.prepararNovaEmpresa}"
                                  oncomplete="PF('empresaDialogWidgetVar').show()"
                                  update="empresaDialog"
-                                 process="@this"
-                />
+                                 process="@this">
+                    <p:resetInput target="empresaDialog" />
+                </p:commandButton>
 
                 <p:separator />
 
