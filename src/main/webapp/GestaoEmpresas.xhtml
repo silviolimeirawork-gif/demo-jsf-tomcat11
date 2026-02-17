@@ -102,6 +102,8 @@
                         redisplay="false"
             />
 
+            <p:defaultCommand target="salvarCommandButton" scope="empresaDialog"/>
+
             <h:panelGrid columns="2"
                          id="empresaPanelGrid"
                          rendered="#{gestaoEmpresasBean.empresa ne null}"
@@ -174,11 +176,12 @@
                  -->
 
                 <h:outputLabel />
-                <p:commandButton value="Salvar"
-                                 actionListener="#{gestaoEmpresasBean.salvar}"
-                                 update="empresasDataTable empresaPanelGrid dlgmsgs"
-                                 oncomplete="if (!args.validationFailed) PF('empresaDialogWidgetVar').hide()"
-                                 process="empresaDialog"
+                <p:commandButton id="salvarCommandButton"
+                        value="Salvar"
+                        actionListener="#{gestaoEmpresasBean.salvar}"
+                        update="empresasDataTable empresaPanelGrid dlgmsgs"
+                        oncomplete="if (!args.validationFailed) PF('empresaDialogWidgetVar').hide()"
+                        process="empresaDialog"
                 />
 
             </h:panelGrid>
