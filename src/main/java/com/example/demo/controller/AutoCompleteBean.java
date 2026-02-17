@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.RamoAtividade;
 import com.example.demo.service.RamoAtividadeService;
+import com.example.demo.util.FacesMessages;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -14,6 +15,9 @@ import java.util.List;
 @Named
 @RequestScoped
 public class AutoCompleteBean implements Serializable {
+
+    @Inject
+    private FacesMessages facesMessages;
 
     @Inject
     private RamoAtividadeService ramoAtividadeService;
@@ -34,12 +38,13 @@ public class AutoCompleteBean implements Serializable {
     public void aoSelecionar() {
         if (ramoAtividadeSelecionado != null) {
             FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage("Selecionado", ramoAtividadeSelecionado.getDescricao()));
+                    new FacesMessage("Selecionado: " + ramoAtividadeSelecionado.getDescricao()));
         }
+
     }
 
     /**
-     * Mostra as cidades selecionadas
+     * Mostra as ramos de atividades selecionadas
      */
     public void mostrarMultiplas() {
         if (ramoAtividadesMultiplas.isEmpty()) {
@@ -70,15 +75,15 @@ public class AutoCompleteBean implements Serializable {
         return ramoAtividadeSelecionado;
     }
 
-    public void setCidadeSelecionado(RamoAtividade ramoAtividadeSelecionado) {
+    public void setRamoAtividadeSelecionado(RamoAtividade ramoAtividadeSelecionado) {
         this.ramoAtividadeSelecionado = ramoAtividadeSelecionado;
     }
 
-    public List<RamoAtividade> getCidadesMultiplas() {
+    public List<RamoAtividade> getRamoAtividadesMultiplas() {
         return ramoAtividadesMultiplas;
     }
 
-    public void setCidadesMultiplas(List<RamoAtividade> cidadesMultiplas) {
-        this.ramoAtividadesMultiplas = cidadesMultiplas;
+    public void setRamoAtividadesMultiplas(List<RamoAtividade> ramoAtividadeesMultiplas) {
+        this.ramoAtividadesMultiplas = ramoAtividadesMultiplas;
     }
 }

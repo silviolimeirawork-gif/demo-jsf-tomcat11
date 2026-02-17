@@ -6,7 +6,9 @@ import com.example.demo.model.RamoAtividade;
 import com.example.demo.model.TipoEmpresa;
 import com.example.demo.repository.Empresas;
 import com.example.demo.repository.RamoAtividades;
+import com.example.demo.service.CadastroEmpresaService;
 import com.example.demo.util.FacesMessages;
+import com.example.demo.util.Transacional;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
@@ -35,10 +37,37 @@ public class GestaoEmpresasBean implements Serializable {
     @Inject
     private RamoAtividades ramoAtividades;
 
-    private Converter ramoAtividadeConverter;
+    @Inject
+    private CadastroEmpresaService cadastroEmpresaService;
 
     @Inject
     private Empresas empresas;
+
+    @Inject
+    private AutoCompleteBean autoCompleteBean;
+
+    private Empresa empresa;
+
+    private boolean jaHouvePesquisa() {
+        return termoPesquisa != null && !"".equals(termoPesquisa);
+    }
+
+    public void salvar() {
+        empresa.setRamoAtividade(
+                autoCompleteBean.getRamoAtividadeSelecionado());
+        cadastroEmpresaService.salvar(empresa);
+
+        if (jaHouvePesquisa()) {
+            pesquisar();
+        }
+
+        facesMessages.info("Empresa cadastrada com sucesso!");
+    }
+
+
+    public void prepararNovaEmpresa() {
+        empresa = new Empresa();
+    }
 
     @Inject
     private FacesMessages facesMessages;
@@ -73,15 +102,7 @@ public class GestaoEmpresasBean implements Serializable {
         return TipoEmpresa.values();
     }
 
-    public List<RamoAtividade> completarRamoAtividade(String termo) {
-        List<RamoAtividade> listaRamoAtividades = ramoAtividades.pesquisar(termo);
-
-        ramoAtividadeConverter = new RamoAtividadeConverter(listaRamoAtividades);
-
-        return listaRamoAtividades;
-    }
-
-    public Converter getRamoAtividadeConverter() {
-        return ramoAtividadeConverter;
+    public Empresa getEmpresa() {
+        return empresa;
     }
 }

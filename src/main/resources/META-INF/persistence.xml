@@ -28,7 +28,7 @@
 
             <property
                     name="jakarta.persistence.schema-generation.database.action"
-                    value="drop-and-create"/>
+                    value="none"/>
 
             <!-- =========================================== -->
             <!-- DATA LOADING PROPERTIES (JPA 3.1) -->

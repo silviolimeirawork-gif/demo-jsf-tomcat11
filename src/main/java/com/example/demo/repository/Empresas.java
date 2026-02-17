@@ -41,6 +41,7 @@ public class Empresas implements Serializable {
     }
 
     public Empresa guardar(Empresa empresa) {
+        System.out.println(">>>>>>>>>>>>> empresa: " + empresa.toString());
         return manager.merge(empresa);
     }
 
