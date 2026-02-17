@@ -17,6 +17,11 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.br.CNPJ;
 
 @Entity
 @Table(name = "empresa")
@@ -27,24 +32,32 @@ public class Empresa implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
+	@NotEmpty
 	@Column(name = "nome_fantasia", nullable = false, length = 80)
 	private String nomeFantasia;
-	
+
+	@NotEmpty
 	@Column(name = "razao_social", nullable = false, length = 120)
 	private String razaoSocial;
-	
+
+	@CNPJ
+	@NotNull
 	@Column(nullable = false, length = 18)
 	private String cnpj;
-	
+
+	@NotNull
+	@Past  // data no passado
 	@Column(name = "data_fundacao")
 	@Temporal(TemporalType.DATE)
 	private Date dataFundacao;
-	
+
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "ramo_atividade_id", nullable = false)
 	private RamoAtividade ramoAtividade;
 
+	@NotNull
 	@Column(nullable = false, length = 30)
 	@Enumerated(EnumType.STRING)
 	private TipoEmpresa tipo;

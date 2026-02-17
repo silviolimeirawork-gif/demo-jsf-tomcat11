@@ -170,7 +170,6 @@
             <scope>provided</scope> <!-- Use 'provided' se o servidor fornecer (opcional) -->
         </dependency>
 
-
     </dependencies>
 
     <build>

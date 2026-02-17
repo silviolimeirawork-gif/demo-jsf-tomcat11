@@ -12,6 +12,7 @@ import com.example.demo.util.Transacional;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.control.RequestContextController;
 import jakarta.faces.convert.Converter;
 import jakarta.faces.event.ActionEvent;
 import jakarta.faces.view.ViewScoped;
@@ -59,9 +60,11 @@ public class GestaoEmpresasBean implements Serializable {
 
         if (jaHouvePesquisa()) {
             pesquisar();
+        } else {
+            todasEmpresas();
         }
 
-        facesMessages.info("Empresa cadastrada com sucesso!");
+        facesMessages.info("Empresa salva com sucesso!");
     }
 
 

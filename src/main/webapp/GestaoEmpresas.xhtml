@@ -95,7 +95,11 @@
                 closeOnEscape="true"
         >
 <!--            rendered="#{gestaoEmpresasBean.empresa ne null}"-->
-            <p:growl id="growl" showDetail="true" life="3000"/>
+            <p:messages id="dlgmsgs"
+                        showDetail="true"
+                        closable="true"
+                        redisplay="false"
+            />
 
             <h:panelGrid columns="2"
                          id="empresaPanelGrid"
@@ -106,18 +110,22 @@
                              size="80"
                              maxlength="120"
                              value="#{gestaoEmpresasBean.empresa.razaoSocial}"
+                             label="Ração Social"
                 />
+
 
                 <p:outputLabel value="Nome fantasia:"/>
                 <p:inputText id="nomeFantasia"
                              size="80"
                              maxlength="120"
                              value="#{gestaoEmpresasBean.empresa.nomeFantasia}"
+                             label="Nome Fantasia"
                 />
 
                 <p:outputLabel value="Tipo empresa:"/>
                 <p:selectOneMenu id="tipo"
                                  value="#{gestaoEmpresasBean.empresa.tipo}"
+                                 label="Tipo empresa"
                 >
                     <f:selectItem itemLabel="Selecione a empresa..." />
                     <f:selectItems value="#{gestaoEmpresasBean.tiposEmpresa}"
@@ -158,7 +166,7 @@
 
                     <p:ajax event="itemSelect"
                             listener="#{autoCompleteBean.aoSelecionar}"
-                            update="@this growl"/>
+                            update="@this"/>
                 </p:autoComplete>
                 <!-- Campo oculto que conterá apenas o ID (para persistência)
                 <h:inputHidden id="ramoAtividade" value="#{autoCompleteBean.ramoAtividadeSelecionado.id}" />
@@ -167,8 +175,8 @@
                 <h:outputLabel />
                 <p:commandButton value="Salvar"
                                  actionListener="#{gestaoEmpresasBean.salvar}"
-                                 update="empresasDataTable empresaPanelGrid"
-                                 oncomplete="PF('empresaDialogWidgetVar').hide()"
+                                 update="empresasDataTable empresaPanelGrid dlgmsgs"
+                                 oncomplete="if (!args.validationFailed) PF('empresaDialogWidgetVar').hide()"
                                  process="empresaDialog"
                 />
 
