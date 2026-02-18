@@ -47,4 +47,13 @@
     <welcome-file-list>
         <welcome-file>GestaoEmpresas.xhtml</welcome-file>
     </welcome-file-list>
+
+    <servlet>
+        <servlet-name>TodoController</servlet-name>
+        <servlet-class>com.example.demo.todo.controller.TodoController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TodoController</servlet-name>
+        <url-pattern>/api/todos/*</url-pattern>
+    </servlet-mapping>
 </web-app>
