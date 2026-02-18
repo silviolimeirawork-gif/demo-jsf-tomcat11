@@ -9,6 +9,9 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <properties>
+            <property name="hibernate.validator.autoregister_listeners"
+                      value="false"/>
+
             <!-- Configurações básicas -->
             <property name="jakarta.persistence.jdbc.driver"
                       value="com.mysql.cj.jdbc.Driver"/>
@@ -25,7 +28,7 @@
 
             <property
                     name="jakarta.persistence.schema-generation.database.action"
-                    value="drop-and-create"/>
+                    value="none"/>
 
             <!-- =========================================== -->
             <!-- DATA LOADING PROPERTIES (JPA 3.1) -->
@@ -79,4 +82,5 @@
             <property name="hibernate.format_sql" value="true"/>
         </properties>
     </persistence-unit>
+
 </persistence>

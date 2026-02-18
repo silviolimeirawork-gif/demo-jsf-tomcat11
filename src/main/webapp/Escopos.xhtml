@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="jakarta.faces.core"
+      xmlns:h="jakarta.faces.html">
+<f:view>
+
+    <h:head>
+      <h:outputStylesheet library="sicemal" name="estilo.css" />
+    </h:head>
+
+    <h:body>
+      <header>
+        <h:graphicImage library="sicemal" name="logo.png" />
+        Gestão Empresas
+      </header>
+
+      <div id="conteudo">
+
+          <h:form>
+
+              <h:panelGrid columns="2">
+
+              <h:outputLabel value="Número: "/>
+              <h:outputText value="#{gestaoEmpresasBean.numero}"/>
+
+              <h:outputLabel />
+              <h:commandButton value="Salvar" />
+
+            </h:panelGrid>
+
+          </h:form>
+
+      </div>
+
+    </h:body>
+
+</f:view>
+</html>

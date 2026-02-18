@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="jakarta.faces.core"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="WEB-INF/template/Layout.xhtml"
+>
+<ui:define name="titulo">
+    Cadastro de empresas :)
+</ui:define>
+
+<ui:define name="conteudo">
+
+    <h:form id="frm">
+        <f:metadata>
+            <f:viewAction action="#{gestaoEmpresasBean.todasEmpresas}" />
+        </f:metadata>
+
+        <p:messages id="msgs"
+                    showDetail="true"
+                    closable="true" />
+
+        <p:toolbar id="toolbar"
+                styleClass="ui-toolbar-primary">
+            <p:toolbarGroup align="left">
+                <p:inputText id="tempoPesquisa"
+                        size="30"
+                        placeholder="Pesquisar..."
+                        value="#{gestaoEmpresasBean.termoPesquisa}"
+                />
+                <p:commandButton
+                        icon="pi pi-search"
+                        title="Buscar"
+                        actionListener="#{gestaoEmpresasBean.pesquisar}"
+                        update="empresasDataTable msgs"
+                        process="@this tempoPesquisa"
+                />
+
+                <p:separator />
+
+                <p:commandButton value="Nova"
+                                 icon="pi pi-plus"
+                                 actionListener="#{gestaoEmpresasBean.prepararNovaEmpresa}"
+                                 oncomplete="PF('empresaDialogWidgetVar').show()"
+                                 update="empresaDialog"
+                                 process="@this">
+                    <p:resetInput target="empresaDialog" />
+                </p:commandButton>
+
+                <p:separator />
+
+                <p:commandButton
+                        title="Editar"
+                        icon="pi pi-pencil"
+                        disabled="#{not gestaoEmpresasBean.empresaSelecionada}"
+                        actionListener="#{gestaoEmpresasBean.prepararEdicao}"
+                        oncomplete="PF('empresaDialogWidgetVar').show()"
+                        update="empresaDialog"
+                        process="@this"
+                >
+                    <p:resetInput target="empresaDialog" />
+                </p:commandButton>
+
+                <p:commandButton
+                        title="Excluir"
+                        icon="pi pi-trash"
+                        disabled="#{not gestaoEmpresasBean.empresaSelecionada}"
+                        actionListener="#{gestaoEmpresasBean.excluir}"
+                        update="msgs empresasDataTable toolbar"
+                        process="@this"
+                        onclick="PF('confirmDialog').show(); return false;" />
+
+                <p:confirmDialog widgetVar="confirmDialog"
+                                 message="Tem certeza que deseja excluir esta empresa?"
+                                 header="Confirmação"
+                                 severity="alert"
+                                 closeOnEscape="true"
+                                 closable="true">
+
+                    <p:commandButton value="Sim"
+                                     actionListener="#{gestaoEmpresasBean.excluir}"
+                                     process="@this"
+                                     update="msgs empresasDataTable toolbar"
+                                     oncomplete="PF('confirmDialog').hide()"
+                                     styleClass="ui-button-danger" />
+
+                    <p:commandButton value="Não"
+                                     onclick="PF('confirmDialog').hide()"
+                                     type="button"
+                                     styleClass="ui-button-secondary" />
+                </p:confirmDialog>
+
+                <p:separator />
+
+                <p:commandButton title="Exportar para o excel" icon="pi pi-file-excel">
+                    <p:dataExporter target="empresasDataTable" type="xlsx" fileName="Empresas" />
+                </p:commandButton>
+
+                <p:separator />
+
+            </p:toolbarGroup>
+
+        </p:toolbar>
+
+        <p:spacer height="30px" />
+
+        <p:dataTable
+                id="empresasDataTable"
+                value="#{gestaoEmpresasBean.listaEmpresas}"
+                var="empresa"
+                emptyMessage="Nenhuma informação a ser exibida."
+                paginator="true"
+                rows="10"
+                paginatorPosition="bottom"
+                selectionMode="single"
+                selection="#{gestaoEmpresasBean.empresa}"
+                rowKey="#{empresa.id}"
+        >
+            <p:ajax event="rowSelect" update="frm:toolbar" />
+
+            <p:ajax event="rowUnselect" update="frm:toolbar" />
+
+            <p:column headerText="Razão social" sortBy="#{empresa.razaoSocial}">
+<!--    Observação importante, quando uso um outputLabel dificulta a seleção da linha na grid
+    aplicar essa solução vV -->
+                <h:outputLabel value="#{empresa.razaoSocial}" />
+            </p:column>
+
+            <p:column headerText="Nome fantazia" sortBy="#{empresa.nomeFantasia}">
+                <h:outputLabel value="#{empresa.nomeFantasia}" />
+            </p:column>
+
+            <p:column headerText="Tipo empresa">
+                <h:outputLabel value="#{empresa.tipo.descricao}" />
+            </p:column>
+
+            <p:column headerText="Ramo atividade">
+                <h:outputLabel value="#{empresa.ramoAtividade.descricao}" />
+            </p:column>
+
+        </p:dataTable>
+
+        <p:dialog id="empresaDialog"
+                header="Nova empresa"
+                widgetVar="empresaDialogWidgetVar"
+                modal="true"
+                resizable="false"
+                closeOnEscape="true"
+        >
+<!--            rendered="#{gestaoEmpresasBean.empresa ne null}"-->
+            <p:messages id="dlgmsgs"
+                        showDetail="true"
+                        closable="true"
+                        redisplay="false"
+            />
+
+            <p:defaultCommand target="salvarCommandButton" scope="empresaDialog"/>
+
+            <h:panelGrid columns="2"
+                         id="empresaPanelGrid"
+                         rendered="#{gestaoEmpresasBean.empresa ne null}"
+            >
+                <p:outputLabel value="Razão social:"/>
+                <p:inputText id="razaoSocial"
+                             size="80"
+                             maxlength="120"
+                             value="#{gestaoEmpresasBean.empresa.razaoSocial}"
+                             label="Ração Social"
+                />
+
+
+                <p:outputLabel value="Nome fantasia:"/>
+                <p:inputText id="nomeFantasia"
+                             size="80"
+                             maxlength="120"
+                             value="#{gestaoEmpresasBean.empresa.nomeFantasia}"
+                             label="Nome Fantasia"
+                />
+
+                <p:outputLabel value="Tipo empresa:"/>
+                <p:selectOneMenu id="tipo"
+                                 value="#{gestaoEmpresasBean.empresa.tipo}"
+                                 label="Tipo empresa"
+                >
+                    <f:selectItem itemLabel="Selecione a empresa..." />
+                    <f:selectItems value="#{gestaoEmpresasBean.tiposEmpresa}"
+                        var="tipoEmpresa" itemLabel="#{tipoEmpresa.descricao}"
+                        itemValue="#{tipoEmpresa}"/>
+                </p:selectOneMenu>
+
+                <p:outputLabel value="CNPJ:"/>
+                <p:inputMask id="cnpj"
+                             mask="99.999.999/9999-99"
+                             size="18"
+                             maxlength="18"
+                             value="#{gestaoEmpresasBean.empresa.cnpj}"
+                />
+
+                <p:outputLabel value="Data fundação: "/>
+                <p:calendar id="dataFundacao"
+                            pattern="dd/MM/yyyy"
+                            size="30"
+                            value="#{gestaoEmpresasBean.empresa.dataFundacao}"
+                />
+
+                <!-- Seleção Simples -->
+                <p:outputLabel value="Ramo atividade:"/>
+                <p:autoComplete id="simples"
+                                value="#{autoCompleteBean.ramoAtividadeSelecionado}"
+                                completeMethod="#{autoCompleteBean.buscarRamoAtividades}"
+                                var="ramoAtividade"
+                                itemLabel="#{ramoAtividade.descricao}"
+                                itemValue="#{ramoAtividade}"
+                                converter="ramoAtividadeConverter"
+                                forceSelection="true"
+                                dropdown="true"
+                                minQueryLength="2"
+                                placeholder="Digite a descricao do ramo da atividade..."
+                                panelStyle="width:350px"
+                >
+
+                    <p:ajax event="itemSelect"
+                            listener="#{autoCompleteBean.aoSelecionar}"
+                            update="@this"/>
+                </p:autoComplete>
+                <!-- Campo oculto que conterá apenas o ID (para persistência)
+                <h:inputHidden id="ramoAtividade" value="#{autoCompleteBean.ramoAtividadeSelecionado.id}" />
+                 -->
+
+                <h:outputLabel />
+                <p:commandButton id="salvarCommandButton"
+                        value="Salvar"
+                        actionListener="#{gestaoEmpresasBean.salvar}"
+                        update="empresasDataTable empresaPanelGrid dlgmsgs"
+                        oncomplete="if (!args.validationFailed) PF('empresaDialogWidgetVar').hide()"
+                        process="empresaDialog"
+                />
+
+            </h:panelGrid>
+        </p:dialog>
+
+    </h:form>
+
+</ui:define>
+
+</ui:composition>

@@ -1,0 +1,10 @@
+
+git remote add origin https://github.com/silviolimeirawork-gif/demo-jsf-tomcat11.git
+git branch -M main
+git push -u origin main
+
+JSF e PrimeFaces Essencial - Curso completo
+https://www.youtube.com/watch?v=ezwgBvsd6Ps&t=22605s
+
+Reading Code Like a Pro | IntelliJ IDEA Tips
+https://www.youtube.com/watch?v=hjGVJHOLSjA
