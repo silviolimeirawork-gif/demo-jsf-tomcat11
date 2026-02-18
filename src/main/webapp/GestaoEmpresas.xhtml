@@ -93,7 +93,9 @@
 
                 <p:separator />
 
-                <p:commandButton title="Exportar para o excel" icon="pi pi-file-excel" />
+                <p:commandButton title="Exportar para o excel" icon="pi pi-file-excel">
+                    <p:dataExporter target="empresasDataTable" type="xlsx" fileName="Empresas" />
+                </p:commandButton>
 
                 <p:separator />
 
@@ -122,7 +124,7 @@
             <p:column headerText="Razão social" sortBy="#{empresa.razaoSocial}">
 <!--    Observação importante, quando uso um outputLabel dificulta a seleção da linha na grid
     aplicar essa solução vV -->
-                #{empresa.razaoSocial}
+                <h:outputLabel value="#{empresa.razaoSocial}" />
             </p:column>
 
             <p:column headerText="Nome fantazia" sortBy="#{empresa.nomeFantasia}">
