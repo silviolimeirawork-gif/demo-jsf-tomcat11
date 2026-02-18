@@ -69,7 +69,27 @@
                         actionListener="#{gestaoEmpresasBean.excluir}"
                         update="msgs empresasDataTable toolbar"
                         process="@this"
-                />
+                        onclick="PF('confirmDialog').show(); return false;" />
+
+                <p:confirmDialog widgetVar="confirmDialog"
+                                 message="Tem certeza que deseja excluir esta empresa?"
+                                 header="Confirmação"
+                                 severity="alert"
+                                 closeOnEscape="true"
+                                 closable="true">
+
+                    <p:commandButton value="Sim"
+                                     actionListener="#{gestaoEmpresasBean.excluir}"
+                                     process="@this"
+                                     update="msgs empresasDataTable toolbar"
+                                     oncomplete="PF('confirmDialog').hide()"
+                                     styleClass="ui-button-danger" />
+
+                    <p:commandButton value="Não"
+                                     onclick="PF('confirmDialog').hide()"
+                                     type="button"
+                                     styleClass="ui-button-secondary" />
+                </p:confirmDialog>
 
                 <p:separator />
 
